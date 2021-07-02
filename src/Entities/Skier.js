@@ -62,7 +62,11 @@ export class Skier extends Entity {
     }
 
     turnLeft() {
-       
+        //bug fix #1
+        if(this.direction === 0){
+            this.setDirection(this.direction + 1);
+            }            
+       //ToDo: Write unit test "this.direction is never a negative number"
         if(this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
             this.moveSkierLeft();
         }else {
