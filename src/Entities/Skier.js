@@ -72,7 +72,9 @@ export class Skier extends Entity {
         }else {
             this.setDirection(this.direction - 1);
         }
+        return this.direction;
     }
+    
 
     turnRight() {
         if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
@@ -97,7 +99,7 @@ export class Skier extends Entity {
         //debugger;
 
         const asset = assetManager.getAsset(this.assetName);
-        console.log("asset",asset) //
+        //console.log("asset",asset) //
 
         const skierBounds = new Rect(
             this.x - asset.width / 2,
@@ -120,9 +122,14 @@ export class Skier extends Entity {
         });
 
         if(collision) {
-            console.log(collision)
+            //console.log(collision)
             this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
         }
 
     };
+
 }
+//NOTE:
+//by default, webpack generates output in umd format without polluting global scope.
+//export default {turnLeft};
+
