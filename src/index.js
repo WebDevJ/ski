@@ -5,6 +5,6 @@ document.addEventListener("DOMContentLoaded",() => {
     const skiGame = new Game();
     skiGame.load().then(() => {
         skiGame.init();
-        skiGame.run();
+        //skiGame.run(); // bonus added start key "s"
     });
 });

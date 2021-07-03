@@ -19,4 +19,7 @@ JUMP UPDATE : Issue [#4](https://github.com/WebDevJ/ski/issues/4)<br>
  2. skier can now use the ramp asset to jump whenever he hits a ramp.
  3. only assets of type "rock1" && "rock2" are cleared by jumping before collision.
 
+ Bonus: Issue [#7](https://github.com/WebDevJ/ski/issues/7)<br>
+ Added start button s and intro page with directions issue #7
+
 

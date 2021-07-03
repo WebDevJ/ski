@@ -60,5 +60,5 @@ export const KEYS = {
     UP : 38,
     DOWN : 40,   
     JUMP : 32, //Issue#4 jump = spaceBar
-
+    START : 83 // Bonus // "s" key to start
 };

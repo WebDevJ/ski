@@ -25,6 +25,24 @@ export class Canvas {
 
         this.ctx = canvas.getContext("2d");
         this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+        this.ctx.fillStyle='#9B000F';
+        if (this.y<1){
+            // this.ctx.fillStyle='#FFF';
+            // this.ctx.fillStyle="red"    
+            // this.ctx.fill();
+            this.ctx.textAlign="center"; 
+            this.ctx.fillStyle='#111213';
+            this.ctx.font = "44px Helvetica";
+            this.ctx.fillText(`Welcome To Ski!`,canvas.width/4.5,60);
+            this.ctx.font = "24px Helvetica";
+            this.ctx.fillText(`Press the 'S' key to start`,canvas.width/4.5,100);
+            this.ctx.font = "18px Helvetica";
+            this.ctx.fillText(`Use ← and → to ski and dodge Trees`,canvas.width/4.5,124);
+            this.ctx.fillText(`Use spaceBar to Jump over Rocks`,canvas.width/4.5,150);
+            this.ctx.fillStyle='#E8E9EE';
+        }
+
     }
 
     clearCanvas() {
