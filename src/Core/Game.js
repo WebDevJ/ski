@@ -62,7 +62,6 @@ export class Game {
     }
 
     handleKeyDown(event) {
-        //debugger;
 
         switch(event.which) {
             
@@ -71,6 +70,7 @@ export class Game {
                 event.preventDefault();
                 break;
             case Constants.KEYS.RIGHT:
+                //debugger;
                 this.skier.turnRight();
                 event.preventDefault();
                 break;
@@ -82,6 +82,10 @@ export class Game {
                 this.skier.turnDown();
                 event.preventDefault();
                 break;
+            case Constants.KEYS.JUMP:
+                this.skier.jump();
+                event.preventDefault();
+                break;    
         }
     }
 }

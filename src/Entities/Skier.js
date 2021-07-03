@@ -1,6 +1,6 @@
 import * as Constants from "../Constants";
 import { Entity } from "./Entity";
-import { intersectTwoRects, Rect } from "../Core/Utils";
+import { intersectTwoRects, Rect } from "../Core/Utils"; 
 
 export class Skier extends Entity {
     assetName = Constants.SKIER_DOWN;
@@ -32,7 +32,10 @@ export class Skier extends Entity {
             case Constants.SKIER_DIRECTIONS.RIGHT_DOWN:
                 this.moveSkierRightDown();
                 break;
-        }
+            case Constants.SKIER_DIRECTIONS.JUMP:
+                this.moveSkierDown();
+                break;    
+        } 
     }
 
     moveSkierLeft() {
@@ -77,9 +80,12 @@ export class Skier extends Entity {
     
 
     turnRight() {
+        if(this.direction === 6){
+             this.setDirection(this.direction - 1);
+             } // ToDo: add unitTest to stop this.direction numbers out of range 
         if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
             this.moveSkierRight();
-        }
+            }
         else {
             this.setDirection(this.direction + 1);
         }
@@ -94,6 +100,35 @@ export class Skier extends Entity {
     turnDown() {
         this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
     }
+
+    jump() {
+        //debugger;
+
+        if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT_DOWN) {
+            this.setDirection(Constants.SKIER_DIRECTIONS.JUMP);
+            //this.moveSkierRightDown();
+            this.moveSkierRight();
+        }
+        else {
+            this.setDirection(Constants.SKIER_DIRECTIONS.JUMP);
+            //this.moveSkierLeftDown();
+            this.moveSkierLeft();
+            //this.setDirection(this.direction + 1);
+        }
+
+        const killJump =()=>{ 
+            this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
+        }
+
+        setTimeout(function(){
+            //this.setDirection(Constants.SKIER_DIRECTIONS.DOWN); // not the same scope
+            killJump()
+        }, 500);
+           
+        //console.log(this.direction, "JUMP direction")
+        return this.direction; // functions must always return
+    }
+    //ToDO: unitTest //crash neg. values
 
     checkIfSkierHitObstacle(obstacleManager, assetManager) {
         //debugger;
@@ -120,16 +155,23 @@ export class Skier extends Entity {
 
             return intersectTwoRects(skierBounds, obstacleBounds);
         });
+        //console.log("obstacleAsset",collision) //
+        if(collision && collision.assetName === 'ramp' ){
 
-        if(collision) {
-            //console.log(collision)
-            this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+            this.jump();
         }
+        if(collision && collision.assetName === 'rock1' || collision && collision.assetName === 'rock2' && (this.direction !== Constants.SKIER_DIRECTIONS.JUMP) ){
+            // console.log("DID NOT jump Over",collision.assetName)
+            // console.log("this.direction",this.direction)
+            // console.log("Constants.SKIER_DIRECTIONS.JUMP",Constants.SKIER_DIRECTIONS.JUMP)
+
+            this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+        }else if(collision && collision.assetName === 'tree' || collision && collision.assetName === 'treeCluster'){
+             this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+        } //Todo: refactor all of this to switchCase. hard to read. 
 
     };
 
 }
-//NOTE:
-//by default, webpack generates output in umd format without polluting global scope.
-//export default {turnLeft};
+
 
