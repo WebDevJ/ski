@@ -7,7 +7,7 @@ import { Rect } from './Utils';
 
 export class Game {
     gameWindow = null;
-
+    game = false;
     constructor() {
         this.assetManager = new AssetManager();
         this.canvas = new Canvas(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
@@ -26,6 +26,8 @@ export class Game {
     }
 
     run() {
+        this.game = true;
+
         this.canvas.clearCanvas();
 
         this.updateGameWindow();
@@ -85,7 +87,17 @@ export class Game {
             case Constants.KEYS.JUMP:
                 this.skier.jump();
                 event.preventDefault();
-                break;    
+                break; 
+            case Constants.KEYS.START:
+                //his.skier.jump();
+                if (this.game === false) { 
+                    this.run()
+                    e.preventDefault();
+                } else {
+                      // 's' key dose nothing
+                  }       
+                event.preventDefault();
+                break;          
         }
     }
 }
