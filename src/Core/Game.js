@@ -92,7 +92,7 @@ export class Game {
                 //his.skier.jump();
                 if (this.game === false) { 
                     this.run()
-                    e.preventDefault();
+                    event.preventDefault();
                 } else {
                       // 's' key dose nothing
                   }       
