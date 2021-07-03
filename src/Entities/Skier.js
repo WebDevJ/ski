@@ -1,6 +1,6 @@
 import * as Constants from "../Constants";
 import { Entity } from "./Entity";
-import { intersectTwoRects, Rect } from "../Core/Utils";
+import { intersectTwoRects, Rect } from "../Core/Utils"; 
 
 export class Skier extends Entity {
     assetName = Constants.SKIER_DOWN;
@@ -32,7 +32,10 @@ export class Skier extends Entity {
             case Constants.SKIER_DIRECTIONS.RIGHT_DOWN:
                 this.moveSkierRightDown();
                 break;
-        }
+            case Constants.SKIER_DIRECTIONS.JUMP:
+                this.moveSkierDown();
+                break;    
+        } 
     }
 
     moveSkierLeft() {
@@ -77,9 +80,12 @@ export class Skier extends Entity {
     
 
     turnRight() {
+        if(this.direction === 6){
+             this.setDirection(this.direction - 1);
+             } // ToDo: add unitTest to stop this.direction numbers out of range 
         if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
             this.moveSkierRight();
-        }
+            }
         else {
             this.setDirection(this.direction + 1);
         }
@@ -94,6 +100,35 @@ export class Skier extends Entity {
     turnDown() {
         this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
     }
+
+    jump() {
+        //debugger;
+
+        if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT_DOWN) {
+            this.setDirection(Constants.SKIER_DIRECTIONS.JUMP);
+            //this.moveSkierRightDown();
+            this.moveSkierRight();
+        }
+        else {
+            this.setDirection(Constants.SKIER_DIRECTIONS.JUMP);
+            //this.moveSkierLeftDown();
+            this.moveSkierLeft();
+            //this.setDirection(this.direction + 1);
+        }
+
+        const killJump =()=>{ 
+            this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
+        }
+
+        setTimeout(function(){
+            //this.setDirection(Constants.SKIER_DIRECTIONS.DOWN); // not the same scope
+            killJump()
+        }, 500);
+           
+        console.log(this.direction, "JUMP direction")
+        return this.direction;
+    }
+    //ToDO: unitTest //crash neg. values
 
     checkIfSkierHitObstacle(obstacleManager, assetManager) {
         //debugger;

@@ -16,7 +16,7 @@ test('turnLeft function expected to only return values greater then -1', () => {
 test('SKIER_DIRECTIONS properties length to equal 6', () => {// expected to fail if anyone adds to this object
     const object = Constants.SKIER_DIRECTIONS
     const count= Object.keys(object).length;
-    expect(count).toBe(6);
+    expect(count).toBe(7);
     //console.log(Constants.SKIER_DIRECTIONS, "SKIER_DIRECTIONS");
     //console.log(count, "length SKIER_DIRECTIONS");
 });
@@ -41,4 +41,7 @@ test('all 6 SKIER_DIRECTIONS properties toBe exact value and value type ', () =>
 
     expect(object.RIGHT).toBe(5);
     expect(object.RIGHT).toBeTruthy();
+
+    expect(object.JUMP).toBe(6);
+    expect(object.JUMP).toBeTruthy();
 });
