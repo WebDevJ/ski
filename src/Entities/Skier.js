@@ -123,10 +123,10 @@ export class Skier extends Entity {
         setTimeout(function(){
             //this.setDirection(Constants.SKIER_DIRECTIONS.DOWN); // not the same scope
             killJump()
-        }, 500);
+        }, 1000);
            
-        console.log(this.direction, "JUMP direction")
-        return this.direction;
+        //console.log(this.direction, "JUMP direction")
+        return this.direction; // functions must always return
     }
     //ToDO: unitTest //crash neg. values
 
@@ -155,16 +155,20 @@ export class Skier extends Entity {
 
             return intersectTwoRects(skierBounds, obstacleBounds);
         });
+        //console.log("obstacleAsset",collision) //
 
-        if(collision) {
-            //console.log(collision)
+        if(collision && collision.assetName === 'rock1' || collision && collision.assetName === 'rock2' && (this.direction !== Constants.SKIER_DIRECTIONS.JUMP) ){
+            // console.log("DID NOT jump Over",collision.assetName)
+            // console.log("this.direction",this.direction)
+            // console.log("Constants.SKIER_DIRECTIONS.JUMP",Constants.SKIER_DIRECTIONS.JUMP)
+
             this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
-        }
+        }else if(collision && collision.assetName === 'tree' || collision && collision.assetName === 'treeCluster'){
+             this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+        } //Todo: refactor all of this to switchCase. hard to read. 
 
     };
 
 }
-//NOTE:
-//by default, webpack generates output in umd format without polluting global scope.
-//export default {turnLeft};
+
 
