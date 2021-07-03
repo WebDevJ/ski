@@ -123,7 +123,7 @@ export class Skier extends Entity {
         setTimeout(function(){
             //this.setDirection(Constants.SKIER_DIRECTIONS.DOWN); // not the same scope
             killJump()
-        }, 1000);
+        }, 500);
            
         //console.log(this.direction, "JUMP direction")
         return this.direction; // functions must always return
@@ -156,7 +156,10 @@ export class Skier extends Entity {
             return intersectTwoRects(skierBounds, obstacleBounds);
         });
         //console.log("obstacleAsset",collision) //
+        if(collision && collision.assetName === 'ramp' ){
 
+            this.jump();
+        }
         if(collision && collision.assetName === 'rock1' || collision && collision.assetName === 'rock2' && (this.direction !== Constants.SKIER_DIRECTIONS.JUMP) ){
             // console.log("DID NOT jump Over",collision.assetName)
             // console.log("this.direction",this.direction)

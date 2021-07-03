@@ -13,3 +13,10 @@ UNIT TEST : Issue #3<br>)
 Three unit test added.  
 1. turnLeft(), test function values being returned so we never make a change in the future that gives us a undefined value.
 2. SKIER_DIRECTIONS, these values in constants.js are the root of the problem/bug and test are needed here so we never make a change here to these set of values that goes unoticed.  
+
+JUMP UPDATE : Issue #4<br>)
+ 1. skier can now jump by pressing the spaceBar key.
+ 2. skier can now use the ramp asset to jump whenever he hits a ramp.
+ 3. only assets of type "rock1" && "rock2" are cleared by jumping before collision.
+
+
